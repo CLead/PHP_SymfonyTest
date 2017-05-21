@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Skyways Stock System{% endblock %}</title>
+
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/skyways.css') }}" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet"> 
+
         {% block stylesheets %}{% endblock %}
+
+        <script src="{{ asset('scripts/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('scripts/bootstrap.min.js') }}"></script>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        
+        {{ include('head.html.twig') }}
+        <div id="main" class="container-fluid">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
 
+        </div>
     </body>
-    <footer>
-    CL
-    </footer>
+
+    {{ include('footer.html.twig') }}
+
 </html>

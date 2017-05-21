@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Skyways - Location Maintenance{% endblock %}
+
+{% block body %}
+	Location Maintenance
+
+
+	{% for item in items %}
+
+		<div class="bg-success">
+			<label class="label label-primary">Item: {{ item.id}}</label> 
+			<a href="{{ path('LocationID', {'ItemID' : item.id} ) }}">View</a>
+
+			<br />
+
+		</div>
+		<br>
+    {% endfor %}
+
+{% endblock %}
