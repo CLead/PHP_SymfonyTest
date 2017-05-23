@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
 * @ORM\Entity
-* @ORM\Table(name="StockLocation")
+* @ORM\Table(name="StockType")
 */
-class Location
+class StockType
 {
 	/**
 	  * @ORM\Column(type="integer")
@@ -43,7 +43,7 @@ class Location
      *
      * @param string $description
      *
-     * @return Location
+     * @return StockType
      */
     public function setDescription($description)
     {
@@ -67,7 +67,7 @@ class Location
      *
      * @param boolean $deleted
      *
-     * @return Location
+     * @return StockType
      */
     public function setDeleted($deleted)
     {
