@@ -7,17 +7,33 @@ body h1, h2, h3, h4, h5, label, div
 
 #main
 {
-	margin-top: 90px;
+	
 }
 
-#status
+#TopBar
 {
 	width:100%;
-	background-color: #000;
+	background-color: #137e6f;;
 	color:#fff;
-	padding:4px;
+	padding:8px;
+	height:80px;
 	top:0;
-	position: fixed;
+	display:table;
+}
+
+#TopBar div.Title
+{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#log-info
+{
+	right:0;
+	display: table-cell;
+	vertical-align: middle;
+	font-size: small;
+	text-align: right;
 }
 
 .info
@@ -25,11 +41,11 @@ body h1, h2, h3, h4, h5, label, div
 
 }
 
-#log-info
-{
-	float:right;
-}
 
+.hidden
+{
+	display: none;
+}
 .jumbotron
 {
 	padding:20px;
@@ -44,11 +60,15 @@ body h1, h2, h3, h4, h5, label, div
 
 .navbar-fixed-top-offset-20
 {
-	top:30px;
-	color: #red;
 	border-width: 0 0 1px;
 	right: 0;
 	left: 0;
-	position:fixed;
+	font-size: 14px;
+}
+
+
+.ControlCell a
+{
+	padding:10px;
 }
 

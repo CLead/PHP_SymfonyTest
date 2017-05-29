@@ -3,8 +3,9 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\Location;
 
 
@@ -12,26 +13,60 @@ class LocationController extends Controller
 {
 
 	/**
-	* @Route("/maintain/locations", name="ViewLocations")
+	* @Route("/locations/list", name="ViewLocations")
 	*/
 	public function locationViewAll()
 	{
 		$repository = $this->getDoctrine()->getRepository('AppBundle:Location');
 	    $location = $repository->findAll();
 
+	    if (!$location) 
+	    {
+	    	throw $this->createNotFoundException('No locations in the system');
+	    }
+
+		return $this->render('maintain/locationList.html.twig', array('items'=>$location ));
+	}
+
+	/**
+	* @Route("/locations/service/edit", name="locationEditAjax")
+	*/
+	public function locationAjax(Request $request)
+	{
+		if ($request->isXMLHttpRequest()) 
+		{         
+			$Info = $request->request->get('request');
+
+        	return new JsonResponse(array('status' => '200', 'MSG' => 'OK', 'DATA' => $Info));
+    	}
+
+    	return new Response('Invalid Call', 400);
+	}
+
+	/**
+	* @Route("/maintain/locations/delete?{ItemID}", name="DeleteLocation")
+	*/
+	public function locationDelete($ItemID)
+	{
+		$repository = $this->getDoctrine()->getRepository('AppBundle:Location');
+		$location = $repository->find($ItemID);
+		
+		if ($location)
+		{
+			$em = $this->getDoctrine()->getManager();
+			$em->remove($location);
+			$em->flush();
+		}
+		
+	    $location = $repository->findAll();
 
 	    if (!$location) 
 	    {
 	    	throw $this->createNotFoundException('No locations in the system');
 	    }
 
-    // ... do something, like pass the $product object into a template
 		return $this->render('maintain/locationList.html.twig', array('items'=>$location ));
-
-//$product = $repository->findOneByName('Keyboard');
-
-	}
-
+	}	
 
     /**
      * @Route("/maintain/locations/new", name="LocationNew")
@@ -57,7 +92,7 @@ class LocationController extends Controller
 	} 
 
 	/**
-	* @Route("/maintain/locations/item{ItemID}", name="LocationID")
+	* @Route("/locations/{ItemID}/Edit", name="EditLocation")
 	*/
 	public function locationView($ItemID)
 	{
